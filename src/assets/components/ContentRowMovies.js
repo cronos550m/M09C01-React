@@ -1,8 +1,13 @@
 import GenresInDb from './GenresInDb';
 import LastMovieInDb from './LastMovieInDb';
+import PropTypes from 'prop-types';
 
-
-function ContentRowMovies(){
+function ContentRowMovies(props){
+   const titulo = props.titulo;
+   const cifra = props.cifra;
+   const icon = props.icon;
+   const border = props.border;
+   const text = props.text;
     return (
 
 <div className="container-fluid">
@@ -11,55 +16,23 @@ function ContentRowMovies(){
             </div>
 
             <div className="row">
-
-                <div className="col-md-4 mb-4">
-                    <div className="card border-left-primary shadow h-100 py-2">
+                {titulo.map((item, i)=> <div key={item + i} className="col-md-4 mb-4">
+                    <div className={border[i]}>
                         <div className="card-body">
                             <div className="row no-gutters align-items-center">
                                 <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">Movies in Data Base</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">21</div>
+                                    <div className={text[i]}>{titulo[i]}</div>
+                                    <div className="h5 mb-0 font-weight-bold text-gray-800">{cifra[i]}</div>
                                 </div>
                                 <div className="col-auto">
-                                    <i className="fas fa-film fa-2x text-gray-300"></i>
+                                    <i className={icon[i]}></i>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                )}
 
-                <div className="col-md-4 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2">
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-success text-uppercase mb-1"> Total awards</div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">79</div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-award fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-4 mb-4">
-                    <div className="card border-left-warning shadow h-100 py-2">
-                        <div className="card-body">
-                            <div className="row no-gutters align-items-center">
-                                <div className="col mr-2">
-                                    <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">Actors quantity
-                                    </div>
-                                    <div className="h5 mb-0 font-weight-bold text-gray-800">49</div>
-                                </div>
-                                <div className="col-auto">
-                                    <i className="fas fa-user fa-2x text-gray-300"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div className="row">
@@ -70,4 +43,20 @@ function ContentRowMovies(){
 
 )
 }
+
+ContentRowMovies.propTypes = {
+titulo:PropTypes.array.isRequired,
+icon:PropTypes.array.isRequired,
+text:PropTypes.array.isRequired,
+cifra:PropTypes.array.isRequired,
+border: PropTypes.array.isRequired,
+};
+ContentRowMovies.defaultProps = {
+titulo:"No se encuentra titulo",
+icon:"Icono inaccesible",
+text:"Texto inaccesible",
+cifra: 0,
+border: "null",
+};
+
 export default ContentRowMovies;
